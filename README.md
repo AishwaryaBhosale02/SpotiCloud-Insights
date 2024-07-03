@@ -1,2 +1,2 @@
 # SpotiCloud-Insights
-Developed a web application that performs real-time sentiment analysis on Spotify reviews. It generates dynamic word clouds to visually represent word frequency in positive, negative, and neutral reviews, providing users with intuitive insights into sentiment trends.
+I Developed a web application using Flask to perform sentiment analysis on Spotify reviews. Utilized NLTK's VADER for sentiment classification and WordCloud for visualizing word frequency. The project features an interactive web interface for users to input reviews and view analysis results, including sentiment labels and word clouds for positive, negative, and neutral reviews.
