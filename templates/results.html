@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Sentiment Analysis Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img class="spotify-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/1200px-Spotify_logo_with_text.svg.png" alt="Spotify Logo">
+        <div class="results-container">
+            <h1>Spotify Sentiment Analysis Result</h1>
+            <p class="{{ sentiment }}">{{ sentiment }}</p>
+            {% if wordcloud_positive_path %}
+            <img src="{{ wordcloud_positive_path }}" alt="Positive Word Cloud">
+            {% endif %}
+            {% if wordcloud_negative_path %}
+            <img src="{{ wordcloud_negative_path }}" alt="Negative Word Cloud">
+            {% endif %}
+            {% if wordcloud_neutral_path %}
+            <img src="{{ wordcloud_neutral_path }}" alt="Neutral Word Cloud">
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
