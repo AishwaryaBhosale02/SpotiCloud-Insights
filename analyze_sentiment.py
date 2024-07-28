@@ -1,28 +1,29 @@
 import pandas as pd
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 from wordcloud import WordCloud
 
-def analyze_sentiment_and_generate_wordclouds(df):
-    # Initialize VADER sentiment analyzer
-    sid = SentimentIntensityAnalyzer()
+# Initialize the sentiment analysis pipeline
+model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
+tokenizer = BertTokenizer.from_pretrained(model_name)
+model = BertForSequenceClassification.from_pretrained(model_name)
+sentiment_pipeline = pipeline("sentiment-analysis", model=model, tokenizer=tokenizer)
 
+def analyze_sentiment_and_generate_wordclouds(df):
     # Analyze sentiment for each review
     sentiments = []
-    compound_scores = []
     for review in df['Review']:
-        sentiment_scores = sid.polarity_scores(review)
-        if sentiment_scores['compound'] >= 0.05:
-            sentiment = 'Positive'
-        elif sentiment_scores['compound'] <= -0.05:
-            sentiment = 'Negative'
+        result = sentiment_pipeline(review)
+        sentiment_label = result[0]['label']
+        
+        # Convert model's output to Positive, Negative, or Neutral
+        if sentiment_label in ['1 star', '2 stars']:
+            sentiments.append('Negative')
+        elif sentiment_label in ['4 stars', '5 stars']:
+            sentiments.append('Positive')
         else:
-            sentiment = 'Neutral'
-        sentiments.append(sentiment)
-        compound_scores.append(sentiment_scores['compound'])
-
-    # Add sentiment and compound score columns to dataframe
+            sentiments.append('Neutral')
+    
     df['Sentiment'] = sentiments
-    df['Compound_Score'] = compound_scores
 
     # Generate word clouds for positive, negative, and neutral reviews
     positive_reviews = " ".join(df[df['Sentiment'] == 'Positive']['Review'])
