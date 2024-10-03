@@ -1,5 +1,5 @@
 # SpotiCloud-Insights
-I Developed a web application using Flask to perform sentiment analysis on Spotify reviews. Utilized NLTK's VADER for sentiment classification and WordCloud for visualizing word frequency. The project features an interactive web interface for users to input reviews and view analysis results, including sentiment labels and word clouds for positive, negative, and neutral reviews.
+I Developed a web application using Flask to perform real time sentiment analysis on Spotify reviews. Utilized BERT trasformer model for sentiment classification and WordCloud for visualizing word frequency. The project features an interactive web interface for users to input reviews and view analysis results, including sentiment labels and word clouds for positive, negative, and neutral reviews.
 
 ![Screenshot (65)](https://github.com/user-attachments/assets/3f61bdd9-ffc7-41f3-8949-42bf7a5ea9ae)
 ![Screenshot (66)](https://github.com/user-attachments/assets/e8af973f-b329-4fc3-9988-f6e728d181f6)
